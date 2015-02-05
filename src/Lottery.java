@@ -3,25 +3,32 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import ui.MainFrame;
+import ui.MainFrame2;
+
 public class Lottery {
 
 	public static NumberFormat NUMBERFORMAT3 = new DecimalFormat("000");
 
 	public static void main(String[] args) {
 //		makeBehindOfThreeNumbersMethod1();
+//		makeBehindOfThreeNumbersMethod3();
 		makeBehindOfThreeNumbersMethod2();
+		
+		MainFrame2 mainFrame = new MainFrame2();
+		mainFrame.show();
 	}
 
 	/**
-	 * Éú³Éºó3ºÅÂë·½·¨1 µ¨Âë3¸öÊı ºó3ºÍÎ²
+	 * ç”Ÿæˆå3å·ç æ–¹æ³•1 èƒ†ç 3ä¸ªæ•° å3å’Œå°¾
 	 */
 	private static void makeBehindOfThreeNumbersMethod1() {
 		StringBuffer stringBuffer = new StringBuffer();
 		for (int i = 0; i < 1000; i++) {
 			String numStr = NUMBERFORMAT3.format(i);
-			if (isContainNumbers(numStr, new String[]{"1", "4", "7"})) { //°üº¬µÄµ¨Âë
-				if(!isEqualsWithEndNumber(numStr, 2) //¹ıÂËºÍÎ²Öµ
-//						&& !isGroupThree(numStr)     //¹ıÂË×é3
+			if (isContainNumbers(numStr, new String[]{"1", "4", "7"})) { //åŒ…å«çš„èƒ†ç 
+				if(!isEqualsWithEndNumber(numStr, 2) //è¿‡æ»¤å’Œå°¾å€¼
+//						&& !isGroupThree(numStr)     //è¿‡æ»¤ç»„3
 						){ 
 					stringBuffer.append(numStr +" ");
 				}
@@ -31,7 +38,7 @@ public class Lottery {
 	}
 
 	/**
-	 * Éú³Éºó3ºÅÂë·½·¨1 ºó2µ¨Âë4¸öÊı ºó1µ¨Âë4¸öÊı ºó2ºÍÖµ
+	 * ç”Ÿæˆå3å·ç æ–¹æ³•1 å2èƒ†ç 4ä¸ªæ•° å1èƒ†ç 4ä¸ªæ•° å2å’Œå€¼
 	 */
 	private static void makeBehindOfThreeNumbersMethod2(){
 		StringBuffer stringBuffer = new StringBuffer();
@@ -39,9 +46,66 @@ public class Lottery {
 			String numStr = NUMBERFORMAT3.format(i);
 			String tensStr = numStr.substring(1, 2);
 			String unitsStr = numStr.substring(2, 3);
-			if (isContainNumbers(tensStr, new String[]{"0", "1", "3", "4"}) //Ê®Î»µ¨Âë
-					|| isContainNumbers(unitsStr, new String[]{"0", "1", "3", "4"}) ) { //¸öÎ»µ¨Âë
-				if(!isEqualsWithBehindOfTwoNumbersAdd(numStr, 7)){
+			
+			if (isContainNumbers(tensStr, new String[]{"0", "1", "2", "3"}) //åä½èƒ†ç 
+					|| isContainNumbers(unitsStr, new String[]{"2", "3", "0", "1"}) ) { //ä¸ªä½èƒ†ç 
+//				if(!isEqualsWithEndNumber(numStr, 8)){
+				if(!isEqualsWithBehindOfTwoNumbersAdd(numStr, 6)){
+					stringBuffer.append(numStr +" ");
+				}
+			}
+
+//			if (isContainNumbers(tensStr, new String[]{"7", "6", "9", "5"}) //åä½èƒ†ç 
+//					|| isContainNumbers(unitsStr, new String[]{"5", "7", "8", "9"}) ) { //ä¸ªä½èƒ†ç 
+////				if(!isEqualsWithBehindOfTwoNumbersAdd(numStr, 11)){
+//				if(!isEqualsWithEndNumber(numStr, 0)){
+//					stringBuffer.append(numStr +" ");
+//				}
+//			}
+			
+//			if (isContainNumbers(tensStr, new String[]{"2", "4", "5", "9"}) //åä½èƒ†ç 
+//					|| isContainNumbers(unitsStr, new String[]{"2", "4", "5", "9"}) ) { //ä¸ªä½èƒ†ç 
+//				if(!isEqualsWithBehindOfTwoNumbersAdd(numStr, 7)){
+//					stringBuffer.append(numStr +" ");
+//				}
+//			}
+
+//			if (isContainNumbers(tensStr, new String[]{"4", "2", "6", "0"}) //åä½èƒ†ç 
+//					|| isContainNumbers(unitsStr, new String[]{"4", "0", "8", "6"}) ) { //ä¸ªä½èƒ†ç 
+//				if(!isEqualsWithBehindOfTwoNumbersAdd(numStr, 7)){
+////				if(!isEqualsWithEndNumber(numStr, 3)){
+//					stringBuffer.append(numStr +" ");
+//				}
+//			}
+
+//			if (isContainNumbers(tensStr, new String[]{"5", "7", "3", "9"}) //åä½èƒ†ç 
+//			|| isContainNumbers(unitsStr, new String[]{"7", "9", "5", "1"}) ) { //ä¸ªä½èƒ†ç 
+////				if(!isEqualsWithBehindOfTwoNumbersAdd(numStr, 7)){
+//				if(!isEqualsWithEndNumber(numStr, 8)){
+//					stringBuffer.append(numStr +" ");
+//				}
+//			}
+		}
+		System.out.print(stringBuffer.toString());
+	}
+
+
+	/**
+	 * ç”Ÿæˆå3å·ç æ–¹æ³•1 å2èƒ†ç 4ä¸ªæ•° å1èƒ†ç 4ä¸ªæ•° å2å’Œå€¼
+	 */
+	private static void makeBehindOfThreeNumbersMethod3(){
+		StringBuffer stringBuffer = new StringBuffer();
+		for (int i = 0; i < 1000; i++) {
+			String numStr = NUMBERFORMAT3.format(i);
+			String aaStr = numStr.substring(0, 1);
+			String tensStr = numStr.substring(1, 2);
+			String unitsStr = numStr.substring(2, 3);
+			
+			if (isContainNumbers(tensStr, new String[]{"2", "4", "0", "6"}) //åä½èƒ†ç 
+					|| isContainNumbers(unitsStr, new String[]{"4", "0", "6", "2"})
+							|| isContainNumbers(aaStr, new String[]{"4", "0", "6", "2"}) ) { //ä¸ªä½èƒ†ç 
+				if(!isEqualsWithEndNumber(numStr, 0)){
+//				if(!isEqualsWithBehindOfTwoNumbersAdd(numStr, 7)){
 					stringBuffer.append(numStr +" ");
 				}
 			}
@@ -49,10 +113,11 @@ public class Lottery {
 		System.out.print(stringBuffer.toString());
 	}
 
+
 	/**
-	 * ¼ì²éºó2ºÍÖµÊÇ·ñÏàµÈ
+	 * æ£€æŸ¥å2å’Œå€¼æ˜¯å¦ç›¸ç­‰
 	 * @param value
-	 * @param sum Æ¥ÅäµÄºÍÖµ
+	 * @param sum åŒ¹é…çš„å’Œå€¼
 	 */
 	private static boolean isEqualsWithBehindOfTwoNumbersAdd(String value, int sum){
 		int tens = Integer.parseInt(value.substring(1, 2));
@@ -64,9 +129,9 @@ public class Lottery {
 	}
 
 	/**
-	 * ¼ì²éÊÇ·ñÖ¸¶¨°üº¬µ¨Âë
+	 * æ£€æŸ¥æ˜¯å¦æŒ‡å®šåŒ…å«èƒ†ç 
 	 * @param vaule
-	 * @param µ¨Âë¼¯ºÏ
+	 * @param èƒ†ç é›†åˆ
 	 */
 	private static boolean isContainNumbers(String value, String[] numbers){
 		for(String str : numbers){
@@ -78,9 +143,9 @@ public class Lottery {
 	}
 
 	/**
-	 * ¼ì²éºÍÎ²ÖµÊÇ·ñÏàµÈ
-	 * @param value ¼ì²âÖµ
-	 * @param endNumber ºÍÖµÎ²Êı(0-9)
+	 * æ£€æŸ¥å’Œå°¾å€¼æ˜¯å¦ç›¸ç­‰
+	 * @param value æ£€æµ‹å€¼
+	 * @param endNumber å’Œå€¼å°¾æ•°(0-9)
 	 */
 	private static boolean isEqualsWithEndNumber(String value, int endNumber){
 		int kilobit = Integer.parseInt(value.substring(0, 1));
@@ -98,8 +163,8 @@ public class Lottery {
 	}
 
 	/**
-	 * ÊÇ·ñÎª×é3
-	 * @param value ¼ì²âÖµ
+	 * æ˜¯å¦ä¸ºç»„3
+	 * @param value æ£€æµ‹å€¼
 	 */
 	private static boolean isGroupThree(String value) {
 		List<Character> list = new ArrayList<Character>();
