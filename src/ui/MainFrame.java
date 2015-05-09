@@ -81,8 +81,8 @@ public class MainFrame {
 
 	
 	private void initMakeJButton(){
-		mMakeJButton = new JButton(AppStrings.BUTTON_MAKE);
-		mMakeJButton.setBounds(AppFrameSize.BUTTON_MAKE_Rectangle);
+		mMakeJButton = new JButton(AppStrings.BUTTON_MAKE3);
+		mMakeJButton.setBounds(AppFrameSize.BUTTON_MAKE3_Rectangle);
 		mContainer.add(mMakeJButton);
 		mMakeJButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {

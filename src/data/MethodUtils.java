@@ -11,6 +11,10 @@ import java.util.List;
 
 public class MethodUtils {
 
+	private static String LU0 = "0 3 6 9";
+	private static String LU1 = "1 4 7";
+	private static String LU2 = "2 5 8";
+
 	public static final int TYPE_QIAN2 = 1;
 	public static final int TYPE_HOU2 = 2;
 
@@ -358,5 +362,43 @@ public class MethodUtils {
 			}
 		}
 		return false;
+	}
+
+	public static int[] getLushuArr(String numStr){
+		int[] tem = new int[3];
+		tem[0] = getLushu(numStr.substring(0, 1));
+		tem[1] = getLushu(numStr.substring(1, 2));
+		tem[2] = getLushu(numStr.substring(2, 3));
+		return tem;
+	}
+
+	public static boolean isLushu(String numStr, int lB, int lS, int lG){
+		if(isLshusss(numStr.substring(0, 1), lB) && isLshusss(numStr.substring(1, 2), lS) && 
+				isLshusss(numStr.substring(2, 3), lG)){
+			return true;
+		}
+		return false;
+	}
+
+	private static boolean isLshusss(String num, int l){
+		if(l == 0 && LU0.contains(num)){
+			return true;
+		}else if(l == 1 && LU1.contains(num)){
+			return true;
+		}else if(l == 2 && LU2.contains(num)){
+			return true;
+		}
+		return false;
+	}
+
+	private static int getLushu(String num){
+		if(LU0.contains(num)){
+			return 0;
+		}else if(LU1.contains(num)){
+			return 1;
+		}else if(LU2.contains(num)){
+			return 2;
+		}
+		return -1;
 	}
 }

@@ -21,9 +21,10 @@ public class MainFrame2 {
 	private JFrame mJFrame = null;
 	private Container mContainer = null;
 	
-	private ScrollEditText mSourceTextField;
 	private ScrollEditText mResultTextField;
-	private JButton mMakeJButton = null;
+	private ScrollEditText mSourceTextField;
+	private JButton mMakeJButton2 = null;
+	private JButton mMakeJButton3 = null;
 	private JButton mMakeAllNumberJButton = null;
 
 	private JTextField mDeleteGeJTextField = null;
@@ -34,6 +35,7 @@ public class MainFrame2 {
 
 	private NumberLine mBaiNumberLine, mShiNumberLine, mGeNumberLine;
 	private NumberLine mHeweiNumber;
+	private HistoryPanel mHistoryPanel = null;
 
 	public MainFrame2(){
 		initFrame();
@@ -43,6 +45,7 @@ public class MainFrame2 {
 		initDanmaBox();
 		initHeweiBox();
 		initHou2He();
+		initHistoryPanel();
 	}
 
 	private void initFrame(){
@@ -74,13 +77,21 @@ public class MainFrame2 {
 
 	
 	private void initMakeJButton(){
-		mMakeJButton = new JButton(AppStrings.BUTTON_MAKE);
-		mMakeJButton.setBounds(AppFrameSize.BUTTON_MAKE_Rectangle);
-		mContainer.add(mMakeJButton);
-		mMakeJButton.addActionListener(new ActionListener(){
+		mMakeJButton2 = new JButton(AppStrings.BUTTON_MAKE2);
+		mMakeJButton2.setBounds(AppFrameSize.BUTTON_MAKE2_Rectangle);
+		mContainer.add(mMakeJButton2);
+		mMakeJButton2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				makeData();
+				makeData(false);
+			}
+		});
+
+		mMakeJButton3 = new JButton(AppStrings.BUTTON_MAKE3);
+		mMakeJButton3.setBounds(AppFrameSize.BUTTON_MAKE3_Rectangle);
+		mContainer.add(mMakeJButton3);
+		mMakeJButton3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				makeData(true);
 			}
 		});
 
@@ -149,6 +160,12 @@ public class MainFrame2 {
 		return textField;
 	}
 
+	public void initHistoryPanel(){
+		mHistoryPanel = new HistoryPanel();
+		mHistoryPanel.getPanel().setBounds(AppFrameSize2.HISTORY_NUMBER_Rectangle);
+		mContainer.add(mHistoryPanel.getPanel());
+	}
+
 	public void show() {
 		mJFrame.setVisible(true);
     }
@@ -158,7 +175,7 @@ public class MainFrame2 {
 		mSourceTextField.setText(allStr);
 	}
 
-	private void makeData(){
+	private void makeData(boolean isThree){
 		String resData = mSourceTextField.getText();
 		String geStr = mDeleteGeJTextField.getText();
 		String shiStr = mDeleteShiJTextField.getText();
@@ -167,12 +184,14 @@ public class MainFrame2 {
 		String wanStr = null;
 	
 		DataModel2 dataModel = new DataModel2();
+		dataModel.setHistoryNumber(mHistoryPanel.getHistoryNumber());
+		dataModel.setDeleteLushu(mHistoryPanel.getDeleteLushu());
 		dataModel.setResoureData(resData);
 		dataModel.setDeleteData(geStr, shiStr, baiStr, qianStr, wanStr);
 		dataModel.setDanmaData(mGeNumberLine.getSelectNumber(), mShiNumberLine.getSelectNumber(), mBaiNumberLine.getSelectNumber(), null, null);
 		dataModel.setHewei(mHeweiNumber.getSelectNumber());
 		dataModel.setHou2He(mHou2HeJTextField.getText());
 
-		mResultTextField.setText(dataModel.getResultData());
+		mResultTextField.setText(dataModel.getResultData(isThree));
 	}
 }

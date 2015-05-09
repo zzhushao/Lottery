@@ -23,8 +23,19 @@ public class DataModel2 {
 
 	private int mLengh = 3;
 
+	private String mHistoryNumber;
+	private boolean isDeleteLushu;
+
 	public DataModel2() {
 
+	}
+
+	public void setHistoryNumber(String number){
+		mHistoryNumber = number;
+	}
+
+	public void setDeleteLushu(boolean delete){
+		isDeleteLushu = delete;
 	}
 
 	public void setResoureData(String resData) {
@@ -71,23 +82,37 @@ public class DataModel2 {
 		}
 	}
 
-	public String getResultData() {
+	public String getResultData(boolean isThree) {
 		StringBuffer buffer = new StringBuffer();
 		String space = " ";
 
+		int[] lArr = null;
+		if(isDeleteLushu){
+			lArr = MethodUtils.getLushuArr(mHistoryNumber);
+		}
 		for (String number : mResDataArray) {
 			if (MethodUtils.isDeleteNumber(number, mLengh, mDeleteNumbers) ||
 					MethodUtils.isEqualsHewei(number, mHeiWei) || 
 					MethodUtils.isEqualsHou2he(number, mHou2He)||
-					!MethodUtils.isDanmaNumber(number, mLengh, mDamaNumbers)
+					!MethodUtils.isDanmaNumber(number, mLengh, mDamaNumbers) ||
+					(isDeleteLushu && MethodUtils.isLushu(number, lArr[0], lArr[1], lArr[2]))
+
 					) {
 
 			} else {
-				buffer.append(number);
-				buffer.append(space);
+				if(isThree){
+					buffer.append(number);
+					buffer.append(space);
+				}else{
+					int num = Integer.valueOf(number);
+					if(num < 100){
+						String text = number.substring(1, 3);
+						buffer.append(text);
+						buffer.append(space);
+					}
+				}
 			}
 		}
 		return buffer.toString();
 	}
-
 }

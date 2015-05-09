@@ -12,7 +12,8 @@ public class AppFrameSize {
 
 	public static final Rectangle BUTTON_MAKE_ALL_NUMBER_Rectangle = new Rectangle(350, 15, 100, 50);
 
-	public static final Rectangle BUTTON_MAKE_Rectangle = new Rectangle(350, 125, 100, 50);
+	public static final Rectangle BUTTON_MAKE2_Rectangle = new Rectangle(350, 125, 100, 50);
+	public static final Rectangle BUTTON_MAKE3_Rectangle = new Rectangle(350, 185, 100, 50);
 
 	public static final Rectangle LABEL_DELETE_TITLE_Rectangle = new Rectangle(50, 310, 100, 50);
 	
