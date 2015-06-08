@@ -84,7 +84,7 @@ public class DataModel2 {
 
 	public String getResultData(boolean isThree) {
 		StringBuffer buffer = new StringBuffer();
-		String space = " ";
+		String space = ",";
 
 		int[] lArr = null;
 		if(isDeleteLushu){
